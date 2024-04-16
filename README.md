@@ -77,6 +77,11 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+Dalam pola Observer, Subscriber biasanya didefinisikan sebagai sebuah antarmuka atau trait dalam Rust. Meskipun demikian, dalam kasus BambangShop, penggunaan antarmuka atau trait mungkin tidak sepenuhnya diperlukan jika tidak ada kebutuhan untuk banyak variasi implementasi dari Subscriber. Jika hanya terdapat satu implementasi Subscriber yang diperlukan, maka sebuah Model struct tunggal mungkin sudah cukup untuk menangani fungsi-fungsinya. Namun, penggunaan antarmuka atau trait tetap dapat bermanfaat jika kita ingin memisahkan kontrak antara Publisher dan Subscriber.
+
+Ketika id dalam Program dan url dalam Subscriber dimaksudkan untuk unik, menggunakan Vec (list) tidak cukup karena mencari keunikan memerlukan iterasi melalui seluruh list. Sebaliknya, menggunakan DashMap (map/dictionary) seperti yang digunakan saat ini lebih tepat karena memungkinkan akses langsung dan memastikan keunikan id dengan kompleksitas waktu yang lebih rendah.
+
+Dalam bahasa Rust, compiler menegakkan aturan ketat untuk membuat program yang aman secara bersamaan. Dalam kasus variabel statis SUBSCRIBERS, menggunakan DashMap memang merupakan pilihan yang baik karena memastikan operasi pada variabel tersebut dapat dilakukan dengan aman oleh beberapa thread secara bersamaan. Implementasi Singleton pattern mungkin tidak cukup untuk memastikan keamanan thread dalam konteks ini.
 
 #### Reflection Publisher-2
 
