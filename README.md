@@ -63,7 +63,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement subscribe function in Notification controller.`
     -   [x] Commit: `Implement unsubscribe function in Notification service.`
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -84,5 +84,18 @@ Ketika id dalam Program dan url dalam Subscriber dimaksudkan untuk unik, menggun
 Dalam bahasa Rust, compiler menegakkan aturan ketat untuk membuat program yang aman secara bersamaan. Dalam kasus variabel statis SUBSCRIBERS, menggunakan DashMap memang merupakan pilihan yang baik karena memastikan operasi pada variabel tersebut dapat dilakukan dengan aman oleh beberapa thread secara bersamaan. Implementasi Singleton pattern mungkin tidak cukup untuk memastikan keamanan thread dalam konteks ini.
 
 #### Reflection Publisher-2
+1. Dalam pola compound Model-View-Controller (MVC), tidak terdapat "Service" dan "Repository". Model dalam MVC mencakup penyimpanan data dan logika bisnis. Namun, seiring dengan kompleksitas aplikasi yang berkembang, terkadang diperlukan pemisahan yang lebih jauh dengan memperkenalkan konsep "Service" dan "Repository". Ini karena:
+
+- Pemisahan Concerns: Dengan memisahkan Model menjadi lapisan Service dan Repository, kita lebih ketat dalam memisahkan concern. Lapisan Service menangani logika bisnis aplikasi, sedangkan lapisan Repository menangani akses data dan persistensi. Pemisahan ini membuat basis kode lebih mudah dipahami, dipelihara, dan diskalakan.
+- Fleksibilitas dan Keterulangan: Memisahkan Model menjadi lapisan Service dan Repository memudahkan dalam menukar implementasi.
+- Pengujian: Pemisahan concern memudahkan dalam pengujian unit berbagai bagian aplikasi secara terisolasi.
+
+2. Jika kita hanya menggunakan Model tanpa memisahkan menjadi lapisan Service dan Repository, interaksi antara model yang berbeda (seperti Program, Subscriber, dan Notification) kemungkinan akan menjadi sangat terikat. Ini dapat menyebabkan peningkatan kompleksitas kode dan penurunan keberlanjutan saat aplikasi berkembang. Misalnya:
+
+- Tanpa pemisahan concern yang jelas, logika bisnis terkait Program, Subscriber, dan Notification mungkin menjadi terjalin dalam lapisan Model.
+- Saat aplikasi berkembang dan fitur-fitur baru ditambahkan, mengelola interaksi dan ketergantungan antara model yang berbeda dapat menjadi tantangan.
+- Kode terkait akses dan manipulasi data juga mungkin memenuhi lapisan Model, membuatnya sulit dipahami dan dipelihara.
+
+3. Saya telah menggunakan Postman untuk menguji API dan berkolaborasi dalam pengembangan API. Postman menyediakan antarmuka yang ramah pengguna untuk mengirim permintaan ke API dan memeriksa respons. Biasanya, saya menggunakan Postman untuk mengirim permintaan HTTP ke ujung server dan memverifikasi apakah respons sesuai dengan harapan. Postman memungkinkan pengguna untuk mengatur permintaan ke dalam koleksi dan mendefinisikan lingkungan dengan variabel. Ini memudahkan dalam mengelola dan menjalankan kumpulan permintaan terkait, menyederhanakan proses pengujian.
 
 #### Reflection Publisher-3
