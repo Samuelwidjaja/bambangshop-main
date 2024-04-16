@@ -68,8 +68,8 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
     -   [x] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -99,3 +99,14 @@ Dalam bahasa Rust, compiler menegakkan aturan ketat untuk membuat program yang a
 3. Saya telah menggunakan Postman untuk menguji API dan berkolaborasi dalam pengembangan API. Postman menyediakan antarmuka yang ramah pengguna untuk mengirim permintaan ke API dan memeriksa respons. Biasanya, saya menggunakan Postman untuk mengirim permintaan HTTP ke ujung server dan memverifikasi apakah respons sesuai dengan harapan. Postman memungkinkan pengguna untuk mengatur permintaan ke dalam koleksi dan mendefinisikan lingkungan dengan variabel. Ini memudahkan dalam mengelola dan menjalankan kumpulan permintaan terkait, menyederhanakan proses pengujian.
 
 #### Reflection Publisher-3
+1. Dalam kasus tutorial ini, kita menggunakan variasi Push model dari Observer Pattern. Ini terjadi karena dalam tutorial, publisher (Program) secara aktif mengirimkan notifikasi kepada subscribers (Subscriber) setiap kali terjadi perubahan status program.
+
+2. Jika kita menggunakan variasi Pull model dari Observer Pattern, artinya subscribers harus secara aktif meminta (pull) data dari publisher saat mereka ingin memperbarui informasi. Keuntungan dari menggunakan Pull model adalah:
+   - Efisiensi penggunaan sumber daya: Subscribers hanya akan memperbarui informasi saat mereka benar-benar membutuhkannya, sehingga mengurangi jumlah pemanggilan yang tidak perlu.
+   - Kontrol yang lebih besar: Subscribers memiliki kontrol penuh atas kapan mereka ingin memperbarui informasi dari publisher.
+
+   Namun, ada beberapa kelemahan yang mungkin timbul:
+   - Kompleksitas yang lebih tinggi: Implementasi Pull model memerlukan logika tambahan untuk mengelola permintaan dan respons antara publisher dan subscribers.
+   - Potensial untuk informasi yang tidak mutakhir: Jika subscribers tidak memperbarui informasi secara teratur, mereka mungkin tidak selalu memiliki data yang paling mutakhir.
+
+3. Jika kita memutuskan untuk tidak menggunakan multi-threading dalam proses notifikasi, maka notifikasi akan dikirim secara berseri (sequential) dan tidak secara simultan kepada semua subscribers. Ini dapat menyebabkan keterlambatan dalam pengiriman notifikasi, terutama jika ada jumlah besar subscribers atau jika ada subscribers yang lambat dalam merespons notifikasi. Selain itu, penggunaan proses notifikasi berseri juga dapat menyebabkan aplikasi menjadi lambat atau tidak responsif jika ada subscribers yang memerlukan waktu lama untuk memproses notifikasi tersebut.
